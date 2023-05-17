@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/funcoes.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/cadastro.css">
+</head>
+<body>
+
+    <!-- Início da Header -->
+    <div class="header">
+        <div class="container">
+            <div class="logo-img">
+                <img src="assets/imgs/espiral_home.jpg" alt="espiral_home">
+            </div>
+            <h1 class="titulo">A Espiral do mestre</h1>
+            <ul class="navbar">
+                <li><a href="">O que é Rpg?</a></li>
+                <li>|</li>
+                <li><a href="">Torne-se Mestre</a></li>
+                <li>|</li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- Fim da Header -->
+
+
+    <!-- Início do banner de cadastro -->
+    <div class="banner-cadastro">
+        <div class="img-box">
+            <img src="assets/imgs/espiral_cadastro.jpg" alt="">
+        </div>
+        <div class="box-cadastro">
+            <h1>
+                TORNE-SE MESTRE
+            </h1>
+            <h3 id="h3-0">
+                INSIRA SEU NOME:
+            </h3>
+
+            <input id="input_nome" placeholder="insira seu nome">
+
+            <h3 id="h3-1">
+                INSIRA SEU EMAIL:
+            </h3>
+
+            <input id="input_email" placeholder="Insira seu email">
+
+            <h3 id="h3-2">
+                INSIRA SUA SENHA:
+            </h3>
+
+            <input id="input_senha" type="password" placeholder="*******">
+
+            <h3 id="h3-3">
+                CONFIRME A SENHA:
+            </h3>
+            
+            <input id="input_confirmSenha" type="password" placeholder="*******"> 
+
+            <div class="div-button">
+                <button onclick="cadastrar()">Cadastrar</button>
+            </div>
+            <div id="div_aguardar"></div>
+            <div class="card_erro" id="cardErro">
+                <span id="mensagem_erro"></span>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        function cadastrar() {
+            aguardar();
+    
+            //Recupere o valor da nova input pelo nome do id
+            // Agora vá para o método fetch logo abaixo
+            var nomeVar = input_nome.value
+            var emailVar = input_email.value
+            var senhaVar = input_senha.value
+            var confirmacaoSenhaVar = input_confirmSenha.value;
+    
+            if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+    
+                finalizarAguardar();
+                return false;
+            }
+            else {
+                setInterval(sumirMensagem, 5000)
+            }
+    
+            // Enviando o valor da nova input
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    nomeServer: nomeVar,
+                    emailServer: emailVar,
+                    senhaServer: senhaVar
+                })
+            }).then(function (resposta) {
+    
+                console.log("resposta: ", resposta);
+    
+                if (resposta.ok) {
+                    cardErro.style.display = "block";
+    
+                    mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+    
+                    setTimeout(() => {
+                        window.location = "login.html";
+                    }, "2000")
+    
+                    limparFormulario();
+                    finalizarAguardar();
+                } else {
+                    throw ("Houve um erro ao tentar realizar o cadastro!");
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                finalizarAguardar();
+            });
+    
+            return false;
+        }
+    
+        function sumirMensagem() {
+            cardErro.style.display = "none"
+        }
+    
+    </script>
+
+    

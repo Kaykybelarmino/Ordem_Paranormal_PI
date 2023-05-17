@@ -1,0 +1,202 @@
+body{
+    margin: 0;
+    height: 100%;
+}
+
+h1, h2, a, li, span, p{
+    font-family: arial;
+}
+
+.header{
+    display: flex;
+    height: 125px;
+    width: 100%;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+}
+
+.header .container{
+    display: flex;
+    width: 80%;
+    margin: auto;
+    justify-content: start;
+    
+}
+
+.logo-img{
+    display: flex;
+    width: 125px;
+    height: 125px;
+    display: flex;
+}
+
+.titulo{
+    display: flex;
+    color: black;
+    font-size: 30px;
+    align-items: center;
+
+
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    width: 300px;
+}
+
+.navbar li{
+    color: black;
+}
+
+.navbar a{
+    display: flex;
+    text-decoration: none;
+    color: black;
+}
+
+.banner{
+    display: flex;
+    width: 100%;
+    height: 500px;
+    background-color: black;
+    margin-bottom: 0;
+    
+}
+
+.box-text{
+    display: flex;
+    width: 60%;
+    justify-content: end;
+}
+
+.box-text-invert{
+    display: flex;
+    width: 60%;
+    margin-left: 80px;
+}
+
+
+.box-img{
+    display: flex;
+    width: 40%;
+    margin-left: 30px;
+}
+
+.box-img-invert{
+    display: flex;
+    width: 40%;
+    justify-content: end;
+}
+
+
+.banner .container{
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    align-items: center;
+}
+
+.banner .container-inverse{
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    align-items: center;
+}
+
+.banner .box-text-invert .public h1{
+    color: white;
+    margin: 0;
+    font-size: 40px;
+}
+
+
+.banner .box-text .public h1{
+    color: white;
+    margin: 0;
+    font-size: 40px;
+}
+
+
+.banner .box-text .public  h4{
+    color: white;
+    @font-face{
+        font-family: "Quattrocento-Regular"; 
+        src: url("../assets/font/Quattrocento-Regular.ttf") format("truetype"); 
+      }
+    font-weight: lighter;
+   
+}
+
+
+.banner .box-text-invert .public  h4{
+    color: white;
+    @font-face{
+        font-family: "Quattrocento-Regular"; 
+        src: url("../assets/font/Quattrocento-Regular.ttf") format("truetype"); 
+      }
+    font-weight: lighter;
+    font-size: unset;
+}
+
+.texto{
+    width: 500px;
+}
+
+.titulo-texto{
+    width: 350px;
+}
+
+.subtitulo{
+    width: 350px;
+}
+
+.banner .box-text .public span{
+    color: white;
+    font-size: 25px;
+}
+
+.banner  .box-text-invert .public span{
+    color: white;
+    font-size: 25px;
+}
+
+.banner .box-text .public p{
+    color: white;
+    font-size: 25px;
+}
+
+.banner  .box-text-invert .public p{
+    color: white;
+    font-size: 25px;
+}
+
+
+
+
+.public{
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.img-home{
+    display: flex;
+    align-items: center;
+    width: 40%;
+}
+
+.img-home-inverse{
+    display: flex;
+    align-items: center;
+    width: 60%;
+}
+
+.img-home img, .img-home-inverse img{
+    width: 500px;
+    height: 300px;
+}
