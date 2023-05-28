@@ -20,8 +20,8 @@
 .box-cadastro{
     display: flex;
     flex-direction: column;
-    height: 400px;
-    width: 400px;
+    width: 30vw ;
+    border-radius: 8px;
     background-color: white;
     justify-content: center;
     align-items: center;
@@ -34,7 +34,7 @@
         font-family: "Quattrocento-Regular"; 
         src: url("../assets/font/Quattrocento-Regular.ttf") format("truetype"); 
       }
-    font-weight: lighter;
+    font-weight: bold;
     color: black;
     margin-top: 5px;
     margin-left: 0px;
@@ -42,22 +42,8 @@
     margin-bottom: 10px;
 }
 
- .box-cadastro #h3-0{
-    color: black;
-    @font-face{
-        font-family: "Quattrocento-Regular"; 
-        src: url("../assets/font/Quattrocento-Regular.ttf") format("truetype"); 
-      }
-    font-weight: lighter;
-    font-size: 30px;
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-top: 0px;
-    margin-bottom: 5px;
-  
-}
 
-.box-cadastro #h3-2, .box-cadastro #h3-3, .box-cadastro #h3-1{
+.h3-label{
     color: black;
     @font-face{
         font-family: "Quattrocento-Regular"; 
@@ -71,6 +57,7 @@
     margin-bottom: 10px;
   
 }
+
 
 .box-cadastro input{
     background-color: black; 
@@ -87,6 +74,7 @@
     display: flex;
     width: 100px;
     height: 50px;
+    padding: 20px; 
     align-items: center;
 }
 
@@ -99,6 +87,10 @@
     border-radius: 20px;
     cursor: pointer;
     
+}
+
+h1{ 
+    font-weight: bold;
 }
 
 ::placeholder {

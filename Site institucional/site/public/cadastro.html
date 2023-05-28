@@ -86,7 +86,7 @@
     
             if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
                 cardErro.style.display = "block"
-                mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+                mensagem_erro.innerHTML = "Preencha os campos em branco";
     
                 finalizarAguardar();
                 return false;
@@ -113,10 +113,7 @@
                 console.log("resposta: ", resposta);
     
                 if (resposta.ok) {
-                    cardErro.style.display = "block";
-    
-                    mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-    
+                    mensagemErro = "Ocorreu um erro ao realizar o cadastro"
                     setTimeout(() => {
                         window.location = "login.html";
                     }, "2000")
@@ -124,6 +121,7 @@
                     limparFormulario();
                     finalizarAguardar();
                 } else {
+                    alert(mensagemErro)
                     throw ("Houve um erro ao tentar realizar o cadastro!");
                 }
             }).catch(function (resposta) {
