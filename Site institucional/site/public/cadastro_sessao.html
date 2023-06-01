@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/cadastro_sessao.css">
+</head>
+
+<body>
+    <!-- Início da Header -->
+
+    <div class="janela">
+        <div class="header">
+            <div class="container">
+                <div class="logo-img">
+                    <img src="assets/imgs/espiral_home.jpg" alt="espiral_home">
+                </div>
+                <h1 class="titulo">A Espiral do mestre</h1>
+                <ul class="navbar">
+                    <li><a href="">O que é Rpg?</a></li>
+                    <li>|</li>
+                    <li><a href="cadastro.html">Torne-se Mestre</a></li>
+                    <li>|</li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Fim da Header -->
+    
+        <!-- Inicio do Banner - Ordem paranormal o RPG -->
+        <div class="banner_criar_sessao">
+            <div class="box_criar_sessao">
+                <div class="title_bar">
+                    <span>CRIAR SESSÃO</span>
+                </div>
+                <div class="container_criar_sessao">
+                    <div class="title_input">
+                        <h3>Nome da Sessão:</h3>
+                        <input id="input_nome_sessao">
+                    </div>
+                    <div class="title_input_big">
+                        <h3>Prefácio da sessão:</h3>
+                        <input id="input_prefacio_sessao">
+                    </div>
+                    <div class="singular_title">
+                        <h2>Participantes</h2>
+                    </div>
+                    <div class="container_nomes">
+                        <div class="title_input">
+                            <h3>Nome do Participante:</h3>
+                            <input id="nomeParticipante0">
+                        </div>
+                        <div class="title_input">
+                            <h3>Nome do Personagem:</h3>
+                            <input id="nomePersonagem0">
+                        </div>
+                    </div>
+               
+                    <div id="Participantes">
+                        <div class="divParticipanteInputs" id="participante0">
+                        <div class="title_input_img">
+                            <h3>Imagem do Personagem (Insira Url):</h3>
+                        <div class="container_url">
+                            <input id="urlImagem0">
+                            <div class="button_cadastrar" id="buttonAdd" onclick="novosCamposParaAddNovoParticipante()">
+                                <button>+</button>
+                            </div>
+                            <div class="button_finalizar">
+                                <button id="finalizar" onclick="listarDadosEMandarBanco()">Finalizar</button>
+                            </div>                     
+                        </div>
+                    </div>
+                </div>
+                </div>
+    
+    
+            </div>
+        </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>
+<script>
+    function novosCamposParaAddNovoParticipante(){
+        let count = document.getElementById("Participantes").childElementCount  ;
+
+        button = document.getElementById("buttonAdd");
+        button.remove()
+        let divParticipanteChild = document.createElement("div");
+        divParticipanteChild.class = "title_input";
+        divParticipanteChild.id =  `participante${count}`;
+        divParticipanteChild.innerHTML = `
+    
+            <div class="container_nomes">
+                <div class="title_input">
+            <h3>Nome do participante<h3>
+            <input type="text" id="nomeParticipante${count}"></input>
+            </div>
+                <div class="title_input">
+            <h3>Nome do Personagem<h3>
+            <input type="text" id="nomePersonagem${count}"></input>
+            <h3> 
+                </div>
+            </div>
+            <div class="title_input_img">
+            <h3>Imagem do Personagem (Insira Url):</h3>
+            <div class="container_url">
+            <input type="text" id="urlImagem${count}"></input>
+            </div>
+        
+        `;
+
+        document.getElementById("Participantes").appendChild(divParticipanteChild).appendChild(button);
+
+    }
+
+    function listarDadosEMandarBanco(){
+      //json com todos os dados do usuario / participante / url imagem, em ordem, o ponteiro 0 é do jogador 1, o ponteiro 1 é do jogador 2, e assim em diante
+      let dadosUsuarios = {
+        nomeParticipante: [],
+        nomePersonagem: [],
+        urlImagem: []
+      }
+      let divParticipante = document.getElementById("Participantes");
+      let inputsDivParticipante = divParticipante.getElementsByTagName("input");
+      for(let i = 0; i < inputsDivParticipante.length; i++){
+        if(inputsDivParticipante[i].id.includes("nomeParticipante")){
+          dadosUsuarios.nomeParticipante.push(inputsDivParticipante[i].value);
+        }
+        if(inputsDivParticipante[i].id.includes("nomePersonagem")){
+          dadosUsuarios.nomePersonagem.push(inputsDivParticipante[i].value);
+        }
+        if(inputsDivParticipante[i].id.includes("urlImagem")){
+          dadosUsuarios.urlImagem.push(inputsDivParticipante[i].value);
+        }
+      }
+      console.log(dadosUsuarios);
+    }
+
+</script>

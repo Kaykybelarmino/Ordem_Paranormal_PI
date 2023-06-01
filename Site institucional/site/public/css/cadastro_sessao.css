@@ -1,0 +1,119 @@
+
+.janela{
+    width: 100%;
+    height: 100%;
+}
+
+.banner_criar_sessao {
+    display: flex;
+    width: 100%;
+    height: 80%;
+    background-color: black;
+    margin-bottom: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.box_criar_sessao{
+ background-color: white;
+ width: 60vw;
+ height: 80%;
+ margin-bottom: 5%;
+ margin-top: 5%;
+ padding-bottom: 2%;
+
+}
+
+.container_criar_sessao{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title_bar{
+    display: flex;
+    height: 5vh;
+    background-color: black;
+    border-style: outset;
+    border-width: 1px;
+    border-color: white;
+    color: white;
+    font-weight: bold;
+    align-items: center;
+    padding-left: 4vw;
+}
+
+.title_input input{
+    height: 2.5vh;
+    background-color: black;
+    border-style: none;
+    border-radius: 15px;
+    color: white;
+    padding-left: 1vw;
+}
+
+.title_input_big input{
+    height: 30vh;
+    width: 40vw;
+    background-color: black;
+    border-style: none;
+    border-radius: 15px;
+    color: white;
+    padding-left: 1vw;
+}
+
+.container_nomes{
+    margin-right: 10px;
+    width: 30vw;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.title_input_img h3{
+    padding-left: 1vh;
+    margin-bottom: 1vh;
+}
+
+.title_input_img input{
+    width: 40vw;
+    height: 2.5vh;
+    background-color: black;
+    border-style: none;
+    border-radius: 15px;
+    color: white;
+    padding-left: 1vw;
+}
+
+.container_url{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+.button_cadastrar button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5vh;
+    height: 5vh;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+    border-style: none;
+    border-radius: 5px;
+}
+
+.button_finalizar button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10vh;
+    height: 4vh;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    border-style: none;
+    border-radius: 5px;
+}
