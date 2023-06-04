@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        :root {
+            --background-color: #000000;
+            --text-color: #ffffff;
+            --card-background: #222222;
+            --input-background: #333333;
+            --button-background: #555555;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: Arial, sans-serif;
+        }
+
+        .nav {
+            height: 60px;
+            background-color: var(--input-background);
+        }
+
+        .content {
+            margin: 20px;
+        }
+
+        .card {
+            background-color: var(--card-background);
+            color: var(--text-color);
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card-body {
+            font-size: 14px;
+        }
+
+        .players {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .player {
+            flex: 1;
+        }
+
+        .inputs {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .input {
+            flex: 1 1 100%;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        textarea,
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            background-color: var(--input-background);
+            color: var(--text-color);
+        }
+
+        .salvarButton {
+            background-color: var(--button-background);
+            color: var(--text-color);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .history {
+      
+            color: var(--text-color);
+            border-radius: 5px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .history-header {
+            margin-bottom: 10px;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .card-title h3 {
+            margin: 5px 0;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .card-title-flex {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+        }
+
+        .card-body-flex {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+        }
+
+        .card-body .aba-personagem,
+        .card-body .aba-acao,
+        .card-body .aba-turno {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .dados-personagem {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .dado {
+            flex: 1;
+        }
+
+        .dado h3 {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .dado-personagem-numero {
+            background-color: var(--input-background);
+            color: var(--text-color);
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .box {
+            background-color: var(--input-background);
+            color: var(--text-color);
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .box-turno {
+            background-color: var(--input-background);
+            color: var(--text-color);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+    <div class="nav">
+
+    </div>
+    <div id="content" class="content">
+        <div class="cards-top">
+            <div class="card">
+                <div class="card-title">
+                    Adicionar Turno
+                </div>
+                <div class="card-body">
+                    <div class="players">
+                        <div id="personagensDiv" class="player">
+
+                        </div>
+                        <div class="inputs">
+                            <div class="input">
+                                <label for="">Personagem</label>
+                                <div class="selectPersonagemDiv">
+                                    <select name="" class="selectPersonagem" id="selectPersonagemTurno">
+                                        <option value="">Selecionar</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="input">
+                                <label for="">Ação do personagem: </label>
+                                <textarea rows="5" id="textareaPersonagemTurno"> </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="adicionarTurno()" class="salvarButton">Salvar</button>
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-title">
+                    Editar status do personagem
+                </div>
+                <div class="card-body">
+                    <div class="inputs">
+                        <div class="input">
+                            <label for="">Personagem</label>
+                            <div class="selectPersonagemDiv">
+                                <select name="" class="selectPersonagem" id="selectPersonagemEditarStatus">
+                                    <option value="">Selecionar</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="input">
+                            <label for="">Valor</label>
+                            <input type="number" name="" id="valorCondicaoEditarInput">
+                        </div>
+                        <div class="input">
+                            <label for="">Condição</label>
+                            <select name="" id="condicoesPersonagemAcao">
+                                <option value="-1">Perdeu</option>
+                                <option value="1">Ganhou</option>
+                                <option value="0">Causou</option>
+                            </select>
+                        </div>
+                        <div class="input">
+                            <label for="">PV, SAN ou PE</label>
+                            <select name="" id="atributoPersonagem">
+                                <option value="pv">PV</option>
+                                <option value="san">SAN</option>
+                                <option value="pe">PE</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <button class="salvarButton">Salvar</button>
+                </div>
+            </div>
+
+
+            <div class="history-header">
+                <div class="title">
+                    <h1>Histórico de Ações </h1>
+                </div>
+            </div>
+            <div class="history" id="historicoDeCards">
+
+
+               
+            </div>
+        </div>
+
+</body>
+
+</html>
+<script>
+
+
+    //TODO: Criar função para editar turno => enviar para a controller com um fetch na rota 
+    //TODO: Puxar o histórico de turnos => enviar para a controller com um fetch na rota
+    window.addEventListener('DOMContentLoaded', listarPersonagens);
+    window.addEventListener('DOMContentLoaded', listarTurnos);
+
+
+
+    function adicionarPersonagensSelect(personagens) {
+        selects = document.querySelectorAll(".selectPersonagem")
+        for (select of selects) {
+            options = pegarOptionsDoJsonPersonagem(personagens)
+            for (option of options) {
+                select.appendChild(option)
+            }
+        }
+    }
+
+
+    function pegarOptionsDoJsonPersonagem(personagens) {
+        options = []
+
+        for (i = 0; i < personagens.length; i++) {
+            option = document.createElement("option")
+            option.value = personagens[i].id
+            option.textContent = personagens[i].nome
+
+            options.push(option)
+        }
+
+        return options
+    }
+
+    function criarCard(turno) {
+        var card = document.createElement("div");
+        card.classList.add("card");
+        horarioTurno = new Date(turno.dtHora).toLocaleDateString() + " " + new Date(turno.dtHora).toLocaleTimeString()
+        var cardTitleHTML = `
+      <div class="card-title-flex">
+        <h3>${turno.nome}</h3>
+        <h3>Ação</h3>
+        <h3>Turno</h3>
+      </div>
+    `;
+        var cardBodyHTML = `
+      <div class="card-body-flex">
+        <div class="abaPersonagem">
+          <div class="dado">PV: <div class="number-dado">${turno.vida}</div></div>
+          <div class="dado">SAN: <div class="number-dado">${turno.sanidade}</div></div>
+          <div class="dado">PE: <div class="number-dado">${turno.PE}</div></div>
+        </div>
+        <div class="abaAcaoTomada">
+          <div class="acaoTomada">${turno.descAcao}</div>
+        </div>
+        <div class="abaTurno">
+          <div class="dataTurno">
+            <h3>Turno</h3>
+            <div class="turnoHorario">${horarioTurno}</div>
+          </div>
+        </div>
+      </div>
+    `;
+
+        card.innerHTML = cardTitleHTML + cardBodyHTML;
+        return card;
+    }
+
+    function gerarCards(data) {
+        var historicoDeCards = document.getElementById("historicoDeCards");
+
+        data.forEach(function (turno) {
+            var card = criarCard(turno);
+            historicoDeCards.appendChild(card);
+        });
+    }
+
+
+
+
+    function colocarPersonagensHtml(personagens) {
+        console.log(personagens)
+        adicionarPersonagensSelect(personagens)
+
+    }
+    function listarPersonagens() {
+
+
+        let idSessao = sessionStorage.getItem("idSessao")
+        fetch(`http://localhost:3333/sessao/listarPersonagens`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                colocarPersonagensHtml(data)
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+
+
+    }
+
+
+    function adicionarTurno() {
+        id = sessionStorage.getItem("idSessao")
+        personagem = document.getElementById("selectPersonagemTurno")
+        acaoPersonagem = document.getElementById("textareaPersonagemTurno")
+        console.log("personagem: " + personagem.value)
+        console.log("acao: " + acaoPersonagem.value)
+        json = JSON.stringify({
+            personagem: personagem.value,
+            acao: acaoPersonagem.value,
+            idSessao: id
+
+        })
+
+        fetch(`http://localhost:3333/sessao/adicionarTurno?id=${id}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: json
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data)
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+
+
+    }
+
+    function listarTurnos() {
+        idSessao = sessionStorage.getItem("idSessao");
+        fetch(`http://localhost:3333/sessao/listarTurnos?id=${idSessao}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then((res) => res.json())
+            .then((data) => {
+               
+                gerarCards(data)
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+
+    function calcularValorSobCondicao(){
+        let condicaoPersonagem = condicoesPersonagemAcao.value 
+        let valor = valorCondicaoEditarInput.value
+ 
+        if(condicaoPersonagem == -1) {
+            return -valor 
+         }
+
+        return valor
+    }
+
+    function editarTurno() {
+        idSessao = sessionStorage.getItem("idSessao");
+        valor = valorCondicaoEditarInput.value
+        condicaoPersonagem = condicoesPersonagemAcao.value 
+        atributo = atributoPersonagem.value 
+        json = { 
+            idPersonagem :  selectPersonagemEditarStatus.value,
+            valor : calcularValorSobCondicao() , 
+            condicao : condicaoPersonagem,
+            atributo :  atributo, 
+            idSessao : idSessao
+        }
+
+        //enviar pra controller, fazer model, fazer select de update e sum () no banco com o valor positivo ou negativo
+        //TIRAR urgentemente os console logs 
+
+        //boa sorte 
+        fetch(`http://localhost:3333/sessao/editarTurno?id=${idSessao}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }, 
+            body: json 
+        })
+            .then((res) => res.json())
+            .then((data) => {
+               
+                gerarCards(data)
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+</script>
+
+</html>

@@ -33,7 +33,7 @@ function entrar(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
-        
+
         usuarioModel.entrar(email, senha)
             .then(
                 function (resultado) {
@@ -74,7 +74,7 @@ function cadastrar(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined!");
     } else {
-        
+
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
         usuarioModel.cadastrar(nome, email, senha)
             .then(
@@ -94,9 +94,86 @@ function cadastrar(req, res) {
     }
 }
 
+function listarDadosSessao(req,res){ 
+    usuarioModel.listarDadosSessao()
+    .then(function(resultado){ 
+        if(resultado.length > 0){ 
+            res.status(200).json(resultado); 
+        }else{ 
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(
+        function(erro){ 
+            console.log(erro); 
+            console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
+  
+
+function cadastrarSessaoUsuario(req, res) {
+    let nomeSessao = req.body.nomeSessao;
+    let prefacioSessao = req.body.prefacioSessao;
+    let emailMestre = req.body.emailMestre;
+    let personagensExtras = JSON.parse(req.body.personagensExtras); 
+    let dadosValidar = [nomeSessao, prefacioSessao, emailMestre];
+    
+    if (validarCampos(dadosValidar)) {
+        usuarioModel.cadastrarSessao(nomeSessao, prefacioSessao, emailMestre)
+            .then(function (resultado) {
+                const idSessao = resultado.insertId; // Obtém o ID da sessão cadastrada
+                cadastrarTodosParticipantes(req, res, prefacioSessao, personagensExtras, idSessao);
+               
+            })
+            .catch(function (erro) {
+                console.log("Houve um erro ao buscar os dados no MYSQL.", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            });
+    } else {
+        res.status(400).send("Dados inválidos!");
+    }
+}
+
+
+function cadastrarTodosParticipantes(req, res, prefacioSessao, personagensExtras, idSessao) {
+    const nomeParticipantes = personagensExtras.nomeParticipante;
+    const promises = [];
+    for (let i = 0; i < nomeParticipantes.length; i++) {
+        promises.push(cadastrarParticipante(req, res, prefacioSessao, nomeParticipantes[i], idSessao));
+    }
+    Promise.all(promises)
+        .then(function () {
+            console.log("DEBUG: idSessao=>  " + idSessao)
+            res.json({ idSessao: idSessao }); // Envia o ID da sessão para o frontend
+        })
+        .catch(function (erro) {
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+
+function cadastrarParticipante(req, res, prefacioSessao, nomeParticipante, idSessao) {
+    return usuarioModel.cadastrarParticipante(prefacioSessao, nomeParticipante, idSessao);
+}
+
+
+function validarCampos(campos = []) {
+    for (i = 0; i < campos.length; i++) {
+        if (campos[i] == undefined) {
+            console.log("ERRO no método : validarCampos" )
+            return false;
+        }
+    }
+    return true
+}
+
 module.exports = {
     entrar,
     cadastrar,
     listar,
-    testar
+    testar,
+    cadastrarSessaoUsuario, 
+    listarDadosSessao
 }

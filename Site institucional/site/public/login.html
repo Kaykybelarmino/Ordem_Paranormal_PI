@@ -51,7 +51,7 @@
             <input id="input_senha" type="password" placeholder="*******">
 
             <div class="div-button">
-                <button onclick="">Entrar</button>
+                <button onclick="redirectCadastrarSessao()">Entrar</button>
                
             </div>
             
@@ -59,4 +59,12 @@
     </div>
     </body>
     </html>
-<script></script>
+<script>
+
+function redirectCadastrarSessao(){
+
+    let email = document.getElementById("input_email").value;
+    sessionStorage.setItem("emailMestre", email);
+    window.location.href = "./cadastro_sessao.html";
+}
+</script>
